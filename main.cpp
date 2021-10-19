@@ -18,7 +18,7 @@ int main(){
         // uncommented until we see a need for this in the
         // possible future
         // parse(file);
-        std::cout << "Else" << std::endl;
+        std::cout << "else" << std::endl;
     }
     return 0;
 }
