@@ -1,24 +1,20 @@
-#include "func.hpp"
 #include <iostream>
-#include <sstream>
+#include <fstream>
 
-int main(){
+using namespace std;
 
-    std::string file;
-    // Either read a seperate file to use or use default text.txt file
-    std::cout << "Enter a valid txt file or 'Def'"
-                 " to use default 'text.txt file" << std::endl;
-    std::cin >> file;
+int main() {
+    ifstream file;
+    ofstream written;
+    string word;
 
-    if(file == "Def"){
-        file = "text.txt";
-         parse(file);
+    file.open("file.txt");
+    written.open("lexi.txt");
+
+    while(file >> word) {
+        written << word << endl;
     }
-    else{
-        // uncommented until we see a need for this in the
-        // possible future
-        // parse(file);
-        std::cout << "else" << std::endl;
-    }
-    return 0;
+
+    file.close();
+    written.close();
 }
