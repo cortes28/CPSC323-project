@@ -1,3 +1,12 @@
+/*
+    CPSC 323 Project 1 - Prof. Vasikarlas
+
+    GROUP:
+    Mike Ploythai
+    Bryan Cortes
+    Alejandro Ramos
+*/
+
 #include <fstream>
 #include <iostream>
 #include <regex>
