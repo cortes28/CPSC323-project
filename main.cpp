@@ -24,6 +24,10 @@ int main() {
     remove(txt.begin(), txt.end(), ' ');
     txt.resize(l - c);
 
+    // extending string
+    unsigned sz = txt.size();
+    txt.resize(sz + 1, ' ');
+
     // separating delimiters from string
     string str(txt);
 
@@ -37,10 +41,10 @@ int main() {
         for (auto x : dlm) {
             size_t pos = str.find(x);          // finds x that matches delimiter
             string first = str.substr(0, pos); // output text up to delimiter
-            output << first << endl;
+            output << first << endl << endl;
 
             string second = str.substr(pos, 1); // output delimiter
-            output << second << endl;
+            output << second << endl << endl;
         }
         str = dlm.suffix().str(); // makes new string the remaining
     }
