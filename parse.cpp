@@ -1,5 +1,5 @@
 /*
-    CPSC 323 Project 1 - Prof. Vasikarlas
+    CPSC 323 Project 2 - Prof. Vasikarlas
 
     GROUP:
     Mike Ploythai
