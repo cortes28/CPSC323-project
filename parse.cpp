@@ -1,20 +1,29 @@
-#include <iostream>
+/*
+    CPSC 323 Project 1 - Prof. Vasikarlas
+
+    GROUP:
+    Mike Ploythai
+    Bryan Cortes
+    Alejandro Ramos
+*/
+
+#include <algorithm>
 #include <cstdlib>
+#include <fstream>
+#include <iostream>
 #include <stack>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include<fstream>
 using namespace std;
-
 
 class BinaryTree {
 
-private:
+  private:
     string key;
-    BinaryTree* leftChild;
-    BinaryTree* rightChild;
-public:
+    BinaryTree *leftChild;
+    BinaryTree *rightChild;
+
+  public:
     BinaryTree(string rootObj) {
         this->key = rootObj;
         this->leftChild = NULL;
@@ -24,9 +33,8 @@ public:
     void insertLeft(string newNode) {
         if (this->leftChild == NULL) {
             this->leftChild = new BinaryTree(newNode);
-        }
-        else {
-            BinaryTree* t = new BinaryTree(newNode);
+        } else {
+            BinaryTree *t = new BinaryTree(newNode);
             t->leftChild = this->leftChild;
             this->leftChild = t;
         }
@@ -35,32 +43,23 @@ public:
     void insertRight(string newNode) {
         if (this->rightChild == NULL) {
             this->rightChild = new BinaryTree(newNode);
-        }
-        else {
-            BinaryTree* t = new BinaryTree(newNode);
+        } else {
+            BinaryTree *t = new BinaryTree(newNode);
             t->rightChild = this->rightChild;
             this->rightChild = t;
         }
     }
 
-    BinaryTree* getRightChild() {
-        return this->rightChild;
-    }
+    BinaryTree *getRightChild() { return this->rightChild; }
 
-    BinaryTree* getLeftChild() {
-        return this->leftChild;
-    }
+    BinaryTree *getLeftChild() { return this->leftChild; }
 
-    void setRootVal(string obj) {
-        this->key = obj;
-    }
+    void setRootVal(string obj) { this->key = obj; }
 
-    string getRootVal() {
-        return this->key;
-    }
+    string getRootVal() { return this->key; }
 };
 
-BinaryTree* buildParseTree(ifstream & myfile) {
+BinaryTree *buildParseTree(ifstream &myfile) {
     string curr;
 
     vector<string> fplist;
@@ -69,18 +68,18 @@ BinaryTree* buildParseTree(ifstream & myfile) {
         if (curr != "")
             fplist.push_back(curr);
     }
-    stack<BinaryTree*> pStack;
-    BinaryTree* eTree = new BinaryTree("");
+    stack<BinaryTree *> pStack;
+    BinaryTree *eTree = new BinaryTree("");
     pStack.push(eTree);
-    BinaryTree* currentTree = eTree;
+    BinaryTree *currentTree = eTree;
 
-    string arr[] = { "+", "-", "*", "/", "=", "<", ">"};
+    string arr[] = {"+", "-", "*", "/", "=", "<", ">"};
     vector<string> vect(arr, arr + (sizeof(arr) / sizeof(arr[0])));
 
-    string arr2[] = { "+", "-", "*", "/", "=", "<", ">", ")"};
+    string arr2[] = {"+", "-", "*", "/", "=", "<", ">", ")"};
     vector<string> vect2(arr2, arr2 + (sizeof(arr2) / sizeof(arr2[0])));
 
-    string arr3[] = { "if", "else", "else if", "continue", "break" };
+    string arr3[] = {"if", "else", "else if", "continue", "break"};
     vector<string> vect3(arr3, arr3 + (sizeof(arr3) / sizeof(arr3[0])));
 
     for (unsigned int i = 0; i < fplist.size(); i++) {
@@ -113,20 +112,21 @@ BinaryTree* buildParseTree(ifstream & myfile) {
         else if (find(vect2.begin(), vect2.end(), fplist[i]) == vect2.end()) {
             try {
                 currentTree->setRootVal(fplist[i]);
-                BinaryTree* parent = pStack.top();
+                BinaryTree *parent = pStack.top();
                 pStack.pop();
                 currentTree = parent;
             }
 
             catch (string ValueError) {
-                cerr << "token " << fplist[i] << " is not a valid integer" << endl;
+                cerr << "token " << fplist[i] << " is not a valid integer"
+                     << endl;
             }
         }
     }
     return eTree;
 }
 
-void postorder(BinaryTree* tree) {
+void postorder(BinaryTree *tree) {
     if (tree != NULL) {
         postorder(tree->getLeftChild());
         postorder(tree->getRightChild());
@@ -136,10 +136,9 @@ void postorder(BinaryTree* tree) {
 
 int main() {
 
-    ifstream out_file ("lexi.txt");
+    ifstream out_file("lexi.txt");
 
-    BinaryTree* pt = buildParseTree(out_file);
-
+    BinaryTree *pt = buildParseTree(out_file);
 
     postorder(pt);
 
