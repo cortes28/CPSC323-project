@@ -52,10 +52,10 @@ int main() {
         for (auto x : dlm) {
             size_t pos = str.find(x);          // finds x that matches delimiter
             string first = str.substr(0, pos); // output text up to delimiter
-            output << first << endl;
+            output << first << endl << endl;
 
             string second = str.substr(pos, 1); // output delimiter
-            output << second << endl;
+            output << second << endl << endl;
         }
         str = dlm.suffix().str(); // makes new string the remaining
     }
@@ -63,24 +63,25 @@ int main() {
     output.close();
 
     // remove blanks from file
-    ifstream file2("lexi.txt");
+   ifstream file2("lexi.txt");
 
-    // extracting everything from file, putting into single line string
-    string curr2, text;
+   // extracting everything from file, putting into single line string
+   string curr2, text;
 
-    while (getline(file2, curr2)) {
-        if (curr2 != " ") {
-            text += curr2 + "\n";
-        }
-    }
+   while (getline(file2, curr2)) {
+       if (curr2 != " ") {
+           text += curr2 + "\n";
+       }
+   }
 
-    file2.close();
+   file2.close();
 
-    // writing to file
-    ofstream file3("lexi.txt");
-    text.resize(text.size() - 1);
-    file3 << text;
-    file3.close();
+   // writing to file
+   ofstream file3("lexi.txt");
+   text.resize(text.size() - 1);
+   file3 << text;
+   cout << text;
+   file3.close();
 
     return 0;
 }
